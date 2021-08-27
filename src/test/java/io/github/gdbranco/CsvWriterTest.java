@@ -56,4 +56,16 @@ public class CsvWriterTest  {
     	String expected = String.format("firstName;lastName;startDate;field;Renamed Field\nAlice;Bennett;%s;firstRowField;firstRowRenamedField\nBob;Russell;%s;secondRowField;secondRowRenamedField\n", now, plusDays);
     	assertThat(actual).isEqualTo(expected);
     }
+	
+	@Test
+    public void testCustomPrimitiveField() {
+    	CsvWriter<CustomPrimitivePojo> csvWriter = new CsvWriter<CustomPrimitivePojo>(CustomPrimitiveClass.class);
+    	LocalDate now = LocalDate.now();
+    	LocalDate plusDays = now.plusDays(2);
+		String actual = csvWriter.writeCsv(Arrays.asList(new CustomPrimitivePojo[] {
+    			new CustomPrimitivePojo(new CustomPrimitiveClass("Alice", "Bennett"), now),
+    			new CustomPrimitivePojo(new CustomPrimitiveClass("Bob", "Russell"), plusDays)}));
+    	String expected = String.format("fullName;startDate\nAlice Bennett;%s\nBob Russell;%s\n", now, plusDays);
+    	assertThat(actual).isEqualTo(expected);
+    }
 }

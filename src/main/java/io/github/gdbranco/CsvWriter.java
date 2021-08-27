@@ -20,8 +20,15 @@ public class CsvWriter<T> {
     public static final String CSV_LINE_SEPARATOR_STRING = "\n";
     private Set<String> header = new LinkedHashSet<>();
     private List<Object> values = new ArrayList<>();
+    @SuppressWarnings("rawtypes")
+	private List<Class> customPrimitiveList = new ArrayList<>();
 
-    public String writeCsv(List<T> dados) {
+    public CsvWriter(@SuppressWarnings("rawtypes") Class... customPrimitiveArray) {
+		super();
+		this.customPrimitiveList = Arrays.asList(customPrimitiveArray);
+	}
+
+	public String writeCsv(List<T> dados) {
         if (dados == null || dados.isEmpty()) {
             return "";
         }
@@ -78,12 +85,13 @@ public class CsvWriter<T> {
     private boolean isPrimitive(Object source) {
         @SuppressWarnings("rawtypes")
         Class clazz = source.getClass();
-        return clazz.isPrimitive() 
-        		|| Arrays.asList(new Class[] {
-        						Byte.class, Integer.class, Character.class, Boolean.class,
-        						Double.class, Float.class, Long.class, Short.class,
-        						Void.class, BigDecimal.class, Date.class, String.class,
-        						LocalDate.class }).contains(clazz);
+        @SuppressWarnings("rawtypes")
+		List<Class> defaultPrimitiveList = Arrays.asList(new Class[] {
+						Byte.class, Integer.class, Character.class, Boolean.class,
+						Double.class, Float.class, Long.class, Short.class,
+						Void.class, BigDecimal.class, Date.class, String.class,
+						LocalDate.class});
+		return clazz.isPrimitive() || defaultPrimitiveList.contains(clazz) || customPrimitiveList.contains(clazz);
     }
 
     private boolean isStatic(Field field) {
