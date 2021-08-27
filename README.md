@@ -46,6 +46,14 @@
 
 Download the released version .jar or add dependency to maven
 
+```
+<dependency>
+  <groupId>io.github.gdbranco</groupId>
+  <artifactId>yacsvwriter</artifactId>
+  <version>0.0.2</version>
+</dependency>
+```
+
 ## Usage
 
 **Please refer to the tests included for now, I'll be adding examples in the readme soon**
@@ -92,7 +100,7 @@ public class IgnoredFieldCompositePojo {
     			new IgnoredFieldCompositePojo(new SimplePojo("Alice", "Bennett", now), "firstRowField", "firstRowIgnoredField"),
     			new IgnoredFieldCompositePojo(new SimplePojo("Bob", "Russell", plusDays), "secondRowField", "secondRowIgnoredField")}));
 ```
-* Able to utilize overloading of toString in classes to shorten the amount of field within a specific class, the list of classes can be passed via varargs within the constructor.
+* Able to utilize overloading of toString in classes to shorten the amount of fields within a specific class, the list of classes can be passed via varargs within the constructor.
 ```java
 public class SimplePojo {
 	public String firstName;
@@ -161,8 +169,8 @@ Guilherme David Branco - gdbranco@gmail.com
 Project Link: [https://github.com/gdbranco/YACSVWriter](https://github.com/gdbranco/YACSVWriter)
 
 [contributors-url]: https://github.com/gdbranco/YACSVWriter/graphs/contributors
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[forks-url]: https://github.com/gdbranco/YACSVWriter/network/members
+[stars-url]: https://github.com/gdbranco/YACSVWriter/stargazers
+[issues-url]: https://github.com/gdbranco/YACSVWriter/issues
 [license-url]: https://github.com/gdbranco/YACSVWriter/blob/main/LICENSE
 [linkedin-url]: https://www.linkedin.com/in/guilherme-david-branco-1b4a4b137/
