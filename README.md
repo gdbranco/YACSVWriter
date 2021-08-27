@@ -44,7 +44,7 @@
 
 ## Getting Started
 
-Download the released version .jar or add dependency to maven
+Download the released version .jar or add dependency to maven ([![Maven Central](https://img.shields.io/maven-central/v/io.github.gdbranco/yacsvwriter.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.gdbranco%22%20AND%20a:%22yacsvwriter%22))
 
 ```
 <dependency>
