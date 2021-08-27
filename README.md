@@ -50,11 +50,89 @@ Download the released version .jar or add dependency to maven
 
 **Please refer to the tests included for now, I'll be adding examples in the readme soon**
 
-Currently works for simple POJOs, composite POJOs, complex POJOs.
+* Currently works for simple POJOs, composite POJOs, complex POJOs.
+* Accepts custom field name as well as field ignoring via java annotation.
+```java
+public class SimplePojo {
+	public String firstName;
+    public String lastName;
+    private LocalDate startDate;
 
-Accepts custom field name as well as field ignoring via java annotation.
+    public SimplePojo(String firstName, String lastName, LocalDate startDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.startDate = startDate;
+    }
 
-Able to utilize overloading of toString in classes to shorten the amount of field within a specific class, the list of classes can be passed via varargs within the constructor.
+    public String name() {
+        return this.firstName + " " + this.lastName;
+    }
+
+    public LocalDate getStart() {
+        return this.startDate;
+    }
+}
+public class IgnoredFieldCompositePojo {
+	public SimplePojo simple;
+	public String field;
+	@CsvIgnore
+	public String ignoredField;
+	
+	public IgnoredFieldCompositePojo(SimplePojo simple, String field, String ignoredField) {
+		super();
+		this.simple = simple;
+		this.field = field;
+		this.ignoredField = ignoredField;
+	}
+  CsvWriter<IgnoredFieldCompositePojo> csvWriter = new CsvWriter<IgnoredFieldCompositePojo>();
+    	LocalDate now = LocalDate.now();
+    	LocalDate plusDays = now.plusDays(2);
+		String csvString = csvWriter.writeCsv(Arrays.asList(new IgnoredFieldCompositePojo[] {
+    			new IgnoredFieldCompositePojo(new SimplePojo("Alice", "Bennett", now), "firstRowField", "firstRowIgnoredField"),
+    			new IgnoredFieldCompositePojo(new SimplePojo("Bob", "Russell", plusDays), "secondRowField", "secondRowIgnoredField")}));
+}
+```
+* Able to utilize overloading of toString in classes to shorten the amount of field within a specific class, the list of classes can be passed via varargs within the constructor.
+```java
+public class SimplePojo {
+	public String firstName;
+    public String lastName;
+    private LocalDate startDate;
+
+    public SimplePojo(String firstName, String lastName, LocalDate startDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.startDate = startDate;
+    }
+
+    public String name() {
+        return this.firstName + " " + this.lastName;
+    }
+
+    public LocalDate getStart() {
+        return this.startDate;
+    }
+}
+public class RenameFieldCompositePojo {
+	public SimplePojo simple;
+	public String field;
+	@CsvField(name = "Renamed Field")
+	public String ignoredField;
+	
+	public RenameFieldCompositePojo(SimplePojo simple, String field, String ignoredField) {
+		super();
+		this.simple = simple;
+		this.field = field;
+		this.ignoredField = ignoredField;
+	}
+}
+CsvWriter<RenameFieldCompositePojo> csvWriter = new CsvWriter<RenameFieldCompositePojo>();
+    	LocalDate now = LocalDate.now();
+    	LocalDate plusDays = now.plusDays(2);
+		String csvString = csvWriter.writeCsv(Arrays.asList(new RenameFieldCompositePojo[] {
+    			new RenameFieldCompositePojo(new SimplePojo("Alice", "Bennett", now), "firstRowField", "firstRowRenamedField"),
+    			new RenameFieldCompositePojo(new SimplePojo("Bob", "Russell", plusDays), "secondRowField", "secondRowRenamedField")}));
+```
 
 ## Roadmap
 
