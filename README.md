@@ -84,13 +84,13 @@ public class IgnoredFieldCompositePojo {
 		this.field = field;
 		this.ignoredField = ignoredField;
 	}
-  CsvWriter<IgnoredFieldCompositePojo> csvWriter = new CsvWriter<IgnoredFieldCompositePojo>();
+}
+ CsvWriter<IgnoredFieldCompositePojo> csvWriter = new CsvWriter<IgnoredFieldCompositePojo>();
     	LocalDate now = LocalDate.now();
     	LocalDate plusDays = now.plusDays(2);
 		String csvString = csvWriter.writeCsv(Arrays.asList(new IgnoredFieldCompositePojo[] {
     			new IgnoredFieldCompositePojo(new SimplePojo("Alice", "Bennett", now), "firstRowField", "firstRowIgnoredField"),
     			new IgnoredFieldCompositePojo(new SimplePojo("Bob", "Russell", plusDays), "secondRowField", "secondRowIgnoredField")}));
-}
 ```
 * Able to utilize overloading of toString in classes to shorten the amount of field within a specific class, the list of classes can be passed via varargs within the constructor.
 ```java
