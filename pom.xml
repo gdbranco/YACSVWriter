@@ -6,7 +6,7 @@
 
   <groupId>io.github.gdbranco</groupId>
   <artifactId>yacsvwriter</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
 
   <name>yacsvwriter</name>
   <description>Yet Another CSV Writer (yacsvwriter) is a simple java library for writing csv files based on Java POJOs</description>
