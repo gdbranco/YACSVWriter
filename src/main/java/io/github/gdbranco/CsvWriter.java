@@ -55,7 +55,8 @@ public class CsvWriter<T> {
         @SuppressWarnings("rawtypes")
         Class clazz = currentData.getClass();
         if (isPrimitive(currentData) && currentField != null) {
-            header.add(currentField.getName());
+            header.add(currentField.isAnnotationPresent(CsvField.class) 
+            		? currentField.getAnnotation(CsvField.class).name() : currentField.getName());
             values.add(currentData == null ? "" : currentData.toString());
             return;
         }
